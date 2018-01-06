@@ -22,7 +22,13 @@ async function doPortfolioCalculations(port) {
 	if (port.usable==true) {
 
 		say("LET's ROCK!");
-		const Rf = getRiskFreeRate();
+
+		// GET this week's Risk Free rate (Rf)
+		getRiskFreeRate(port);
+		while(!port.Rf_set) { 
+			await pause(200);
+		}
+
 
 
 	} else {
@@ -33,13 +39,16 @@ async function doPortfolioCalculations(port) {
 
 }//doPortfolioCalculations
 
-
-function getRiskFreeRate() {
+function getRiskFreeRate(portfolio) {
+	let rate = 0.0;
 	const TBILLURL = "https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx";
-
-	let page = $.get(TBILLURL);
-	say( JSON.stringify(page) );
-			
+	let query =	$.get(TBILLURL);
+	query.done( page => {
+		let line1 = page.split(/ctl00_well_uc_rw1YearTRate_lbl1YearTRate/);
+		rate = line1[1].match(/(\d\.\d+)/)[1];	
+		portfolio.setRiskFreeRate(rate);
+	});
+	//fail silently
 }
 
 
@@ -50,6 +59,8 @@ function Portfolio() {
 	this.numberAssets = 0;
 	this.DAYS = 252;
 	this.usable = true;
+	this.Rf = 0.0;
+	this.Rf_set = false;
 	// Methods
 
 	this.clear = function myClear() { 
@@ -71,6 +82,11 @@ function Portfolio() {
 		this.numberAssets++;
 	}
 
+	this.setRiskFreeRate = function mySetRiskFreeRate(rate) {
+		this.Rf = rate;
+		this.Rf_set = true;
+	}
+	this.getRf = function myGetRf() { return this.Rf; }
 
 	// Helper Function to inspect state of this object
 	this.reportAsset = function myReportAsset(n) {
@@ -144,15 +160,12 @@ function watcher() {
 
 		//let rawTickerList = $(event.currentTarget).find('.js-query').val();
 	//	let rawTickerList = "GE C MSFT GOOG AAPL";
-		let rawTickerList = "mhk ea jec goog xlnx ftv oke rrc avb orcl avgo mkc jnj shw udr dvn cme zbh jci glw";
+		let rawTickerList = "mhk ea";
 		let tkrlist = rawTickerList.split(/[ ,]+/);
 		NUM_ASSETS_WAITING = tkrlist.length;  // set up the watch-and-wait
-
 		fetcher(tkrlist, myPortfolio); // the array of tickers and the portfolio object
-
 		doPortfolioCalculations(myPortfolio);
 	});
-
 
 }
 
