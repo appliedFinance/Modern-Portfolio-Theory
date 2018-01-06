@@ -4,18 +4,43 @@ function say(s) { console.log(s); }
 
 function pause(ms) { return new Promise(resolve=>setTimeout(resolve,ms));}
 
-function doPortfolioCalculations(port) {
+let NUM_ASSETS_WAITING=0;
 
-	say("port.length = " + port.numberAssets );
+async function doPortfolioCalculations(port) {
+
+	// Spin while waiting
+	while (port.numberAssets < NUM_ASSETS_WAITING) {
+		await pause(500);
+		say("waiting... " + port.numberAssets + " -- " + NUM_ASSETS_WAITING);
+		if (!port.usable) {
+			say("BREAK on 404");
+			break;
+		}
+	}
+	NUM_ASSETS_WAITING= 0; // clear the block
+
+	if (port.usable==true) {
+
+		say("LET's ROCK!");
+		const Rf = getRiskFreeRate();
 
 
+	} else {
+		//report 404
+
+	}
 
 
+}//doPortfolioCalculations
 
 
+function getRiskFreeRate() {
+	const TBILLURL = "https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx";
 
-}//calcPort
-
+	let page = $.get(TBILLURL);
+	say( JSON.stringify(page) );
+			
+}
 
 
 // Object Definition
@@ -42,12 +67,19 @@ function Portfolio() {
 			//say(history[i].changePercent);
 			//say("perc["+this.numberAssets+"]["+i+"] = " + this.assets.perc[this.numberAssets][i]);
 		}
+		// (+) if (this.DAYS == this.assets.perc.length) check.
 		this.numberAssets++;
 	}
 
+
+	// Helper Function to inspect state of this object
 	this.reportAsset = function myReportAsset(n) {
-		console.log("=== " + this.assets.ticker[n] + " ===");
-		//for(let i=1; i<this.DAYS; i++) {console.log(this.assets.perc[n][i]);}
+		// (+) add out-of-bounds check
+		console.log("=== " + this.assets.ticker[n] + " is loaded ===");
+	}
+
+	this.reportCurrentAsset = function myReportAsset() {
+		console.log("=== " + this.assets.ticker[this.numberAssets-1] + " is loaded ===");
 	}
 
 	this.reportPortfolio = function myReportPortfolio() {
@@ -70,21 +102,17 @@ function Portfolio() {
 
 // Get the Historical Stock data by looping through the user's list
 function fetcher(tkrlist, myPortfolio) {
-
 	for (let i=0; i<tkrlist.length; i++) 
 	{
 		getDataFromAPI(tkrlist[i], myPortfolio);
 	}
-
-	doPortfolioCalculations(myPortfolio);
 }
 
 // Move the data from the returned object into our main object
-function insertIntoPortfolio(data, tkr, port) {
-	//say(tkr);
-	port.addAsset(tkr,data);
-	//	say("assets++ ->   " + port.numberAssets);
-	port.reportPortfolio(port.numberAssets-1);	
+function insertIntoPortfolio(data, tkr, portfolio) {
+	portfolio.addAsset(tkr,data);
+	//portfolio.reportCurrentAsset();	
+	//portfolio.reportPortfolio();
 }
 
 function getDataFromAPI( tkr, portfolio ) {
@@ -97,12 +125,11 @@ function getDataFromAPI( tkr, portfolio ) {
 			'dataType': 'json',
 			'type': 'GET'
 		};
-	//say("***** " + `${tkr}` +"\n" + JSON.stringify(settings) + "\n*****");
-
+	
 	let query =	$.ajax(settings);
 	query.done( data => insertIntoPortfolio(data, tkr, portfolio) );
 	query.fail( data => { portfolio.usable = false; 
-		say("XXX '" + tkr + "' is 404 XXX") } );
+						       say("XXX '" + tkr + "' is 404 XXX") } );
 
 }//getDataFromAPI
 
@@ -112,10 +139,18 @@ function watcher() {
 
 	$('.js-search-form').on("submit", event => {
 		event.preventDefault();
+		console.clear();
 		myPortfolio.clear();
-		//let tkrlist = $(event.currentTarget).find('.js-query').val();
-		let tkrlist = "GE C MSFT GOOG AAPL";
-		fetcher(tkrlist.split(/[ ,]+/), myPortfolio);
+
+		//let rawTickerList = $(event.currentTarget).find('.js-query').val();
+	//	let rawTickerList = "GE C MSFT GOOG AAPL";
+		let rawTickerList = "mhk ea jec goog xlnx ftv oke rrc avb orcl avgo mkc jnj shw udr dvn cme zbh jci glw";
+		let tkrlist = rawTickerList.split(/[ ,]+/);
+		NUM_ASSETS_WAITING = tkrlist.length;  // set up the watch-and-wait
+
+		fetcher(tkrlist, myPortfolio); // the array of tickers and the portfolio object
+
+		doPortfolioCalculations(myPortfolio);
 	});
 
 
