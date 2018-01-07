@@ -6,6 +6,63 @@ function pause(ms) { return new Promise(resolve=>setTimeout(resolve,ms));}
 
 let NUM_ASSETS_WAITING=0;
 
+function renderErrors(portfolio) {
+
+		say("=== 404 === 404 ===");
+		let s= "<p>The following ticker symbols did not return any data.  Please modifiy your portfolio input and try again.</p><p>";
+		for(let i=0; i<portfolio.errors.length; i++) {
+			say(portfolio.errors[i]);
+			s += '<span class="error-spacer">' + portfolio.errors[i] + "</span>";
+		}
+		s += "</p>";
+		s += '<p>Do you want me to Re-Submit after automatically removing these problems?</p><form action="\#" class="js-re-submit"><button type="submit" id="re-send">RESUBMIT</button></form>';
+		$('.js-results').html(s);
+		say("===================");
+
+}
+
+function renderResults(portfolio) {
+	let s="";
+	// First output the portfolio as a whole
+	s = `<table class="width-80">
+		   <caption>Tangency Portfolio</caption>
+				<tr>
+					<th>Sharp Ratio</th>
+					<th>E[r]</th>
+					<th>Volatility</th>
+				</tr>
+				<tr>
+					<td>${portfolio.sharpeRatio}</td>
+					<td>${portfolio.portEr}</td>
+					<td>${portfolio.portVol}</td>
+				</tr>
+			</table>
+			<br><br>
+			`;
+
+	// Now ouput the optimal weights
+	s += `<table class="width-50">
+				<caption>Weights</caption>
+				<tr>
+					<th class="center">STOCK</th>
+					<th>Ticker</th>
+					<th>Optimal</th>
+				<tr>
+				`;	
+	for(let i=0; i<portfolio.numberAssets; i++)
+	{
+		s += `
+				<tr>
+					<td class="center">${i}</td>
+					<td>${portfolio.assets.ticker[i].toUpperCase()}</td>
+					<td>${portfolio.assets.weight[i]}</td>
+				</tr>
+				`;
+	}
+	$('.js-results').html(s);
+}
+
+
 
 async function doPortfolioCalculations(portfolio) {
 
@@ -29,10 +86,10 @@ async function doPortfolioCalculations(portfolio) {
 		say("Risk Free Rate = " + portfolio.Rf);
 		// Do the math next
 		solveForTangentPortfolioWeights(portfolio);
-	
+		renderResults(portfolio);	
 	} else {
-		//report 404
-
+		//report 404's
+		renderErrors(portfolio);
 	}
 
 }//doPortfolioCalculations
@@ -84,6 +141,7 @@ function getDataFromAPI( tkr, portfolio ) {
 	let query =	$.ajax(settings);
 	query.done( data => insertIntoPortfolio(data, tkr, portfolio) );
 	query.fail( data => { portfolio.usable = false; 
+								 portfolio.errors.push(tkr);
 						       say("XXX '" + tkr + "' is 404 XXX") } );
 
 }//getDataFromAPI
@@ -92,12 +150,15 @@ function getDataFromAPI( tkr, portfolio ) {
 //////////////////////////////////////////////////////////////
 //   WEB PAGE CONTROLS
 function watcher() {
+	//document.getElementById("app-anchor").focus();
+	$("#app-anchor").focus();
 	const myPortfolio = new Portfolio();  // Our Portfolio of stocks
 
 	$('.js-search-form').on("submit", event => {
 		event.preventDefault();
 		console.clear();
 		myPortfolio.clear();
+		$('.js-results').html("");
 
 		let rawTickerList = $(event.currentTarget).find('.js-query').val();
 		//let rawTickerList = "GE C MSFT GOOG AAPL";

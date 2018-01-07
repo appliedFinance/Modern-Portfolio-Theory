@@ -19,12 +19,14 @@ function Portfolio() {
 	this.usable = true;
 	this.Rf = 0.0;
 	this.Rf_set = false;
+	this.errors = [];
 	// Methods
 
 	// Clear the object for a new run
 	this.clear = function myClear() { 
 		this.numberAssets = 0;
 		this.usable = true;
+		this.errors = [];
 	}
 
 	// Insert ticker data and change percentages
@@ -143,8 +145,8 @@ function solveForTangentPortfolioWeights(P) {
 
 	// temp fill to get working
 	for(let i=0; i<P.numberAssets; i++) {
-		P.assets.weight = uint(1,99)/100;
-		say(P.assets.ticker[i] + " = " + P.assets.weight);
+		P.assets.weight[i] = uint(1,99)/100;
+		say(P.assets.ticker[i] + " = " + P.assets.weight[i]);
 	}
 	P.portEr = .55;
 	P.portVol = .25;

@@ -62,4 +62,42 @@ input[type=text] {
 	padding-bottom: 30px;
 }
 
+.error-spacer {
+	padding: 10px;
+}
+
+.results-box {
+	width: 80%;
+	margin: auto;
+}
+
+/* The following table style is from w3schools. It makes rows alternate shading. */
+table {
+    width: *100%;
+}
+.width-50 {
+	width: 50%;
+}
+.width-80 {
+	width: 80%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+   background-color:#fff;
+}
+table#t01 th {
+/*    background-color: black;
+    color: white;
+*/
+}
 
