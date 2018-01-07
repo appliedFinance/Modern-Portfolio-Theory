@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Tangential Portfolio</title>
+		<title>Tangency Portfolio</title>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	 crossorigin="anonymous"></script>
@@ -14,14 +14,17 @@
 
 	<body>
 		<main role="main" aria-live="polite">
+		<section name="Directions">
+			<div id="lightbox" class="js-directions"></div>
+		</section>
+
 
 		<section name="SearchBox">
 			<form action="#" class="js-search-form">
-				<fieldset class="center">
-					<legend class="legend-banner">Modern Portfolio Theory</legend>
-					<label for="js-query">Tickers: </label>
-					<input type="text" class="js-query">
-					<button type="submit" class="search-button">Fetch</button>
+				<fieldset class="center snug" style="padding-top:25px;">
+					<legend class="legend-banner"><span class="banner-space">Enter your tickers:</span></legend>
+					<textarea id="js-query" style="width:70%; height:200px;">IBM GOOG</textarea><br><br>
+					<button type="submit" class="search-button" style="margin-right:20px;">Fetch</button>
 					<button type="reset"  class="clear-button" >Clear </button>
 				</fieldset>
 			</form>
@@ -32,6 +35,7 @@
 		</section>
 
 		</main>
+		<script src="directions.js"></script>
 		<script src="stats.js"></script>
 		<script src="portfolio.js"></script>
 		<script src="mpt.js"></script>

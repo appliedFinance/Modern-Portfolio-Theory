@@ -28,7 +28,7 @@ function covar(n, A, B)
 	{
 		sum += ( A[i]-Ea )*( B[i]-Eb );
 	}
-	return ( sum/(n-1) );
+	return ( sum/n );
 }
 
 
