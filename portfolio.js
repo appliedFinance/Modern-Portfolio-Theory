@@ -20,6 +20,7 @@ function Portfolio() {
 	this.Rf = 0.0;
 	this.Rf_set = false;
 	this.errors = [];
+	this.numErrors = 0;
 	// Methods
 
 	// Clear the object for a new run
@@ -27,6 +28,7 @@ function Portfolio() {
 		this.numberAssets = 0;
 		this.usable = true;
 		this.errors = [];
+		this.numErrors = 0;
 	}
 
 	// Insert ticker data and change percentages

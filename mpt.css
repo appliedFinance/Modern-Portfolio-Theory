@@ -20,6 +20,10 @@
 	font-size: 28px;
 }
 
+.max800 {
+	max-width: 800px;
+}
+
 .no-display {
 	display: none;
 }
