@@ -105,3 +105,7 @@ table#t01 th {
 */
 }
 
+.right {
+	text-align: right;
+	padding-right: 55px;
+}
