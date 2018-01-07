@@ -6,28 +6,30 @@ function pause(ms) { return new Promise(resolve=>setTimeout(resolve,ms));}
 
 let NUM_ASSETS_WAITING=0;
 
-async function doPortfolioCalculations(port) {
+async function doPortfolioCalculations(portfolio) {
 
 	// Spin while waiting
-	while (port.numberAssets < NUM_ASSETS_WAITING) {
+	while (portfolio.numberAssets < NUM_ASSETS_WAITING) {
 		await pause(500);
-		say("waiting... " + port.numberAssets + " -- " + NUM_ASSETS_WAITING);
-		if (!port.usable) {
+		say("waiting... " + portfolio.numberAssets + " -- " + NUM_ASSETS_WAITING);
+		if (!portfolio.usable) {
 			say("BREAK on 404");
 			break;
 		}
 	}
 	NUM_ASSETS_WAITING= 0; // clear the block
 
-	if (port.usable==true) {
-
-		say("LET's ROCK!");
-
+	if (portfolio.usable==true) {
 		// GET this week's Risk Free rate (Rf)
-		getRiskFreeRate(port);
-		while(!port.Rf_set) { 
+		getRiskFreeRate(portfolio);
+		while(!portfolio.Rf_set) { 
 			await pause(200);
 		}
+		say("Risk Free Rate = " + portfolio.Rf);
+		// Do the math next
+		solveForTangentPortfolioWeights(portfolio);
+	
+
 
 
 
@@ -48,14 +50,16 @@ function getRiskFreeRate(portfolio) {
 		rate = line1[1].match(/(\d\.\d+)/)[1];	
 		portfolio.setRiskFreeRate(rate);
 	});
-	//fail silently
+	//fail silently letting Rf stay set at zero
 }
 
-
-// Object Definition
+////////////////////////////////////////////////////////
+// Object Definition:  PORTFOLIO OBJECT
 function Portfolio() {
 	// Fields
-	this.assets = { 'ticker': [], 'perc': [] };
+	this.assets = { 'ticker': [], 'perc': [], 'weight': [], 'Er': [], 'vol': [] };
+	this.portEr = 0.0;
+	this.portVol = 0.0;
 	this.numberAssets = 0;
 	this.DAYS = 252;
 	this.usable = true;
@@ -63,18 +67,20 @@ function Portfolio() {
 	this.Rf_set = false;
 	// Methods
 
+	// Clear the object for a new run
 	this.clear = function myClear() { 
 		this.numberAssets = 0;
 		this.usable = true;
 	}
 
+	// Insert ticker data and change percentages
 	this.addAsset = function myAddAsset(tkr,history) {
 		this.assets.ticker[this.numberAssets] = tkr;
 		say("Adding: ticker[" + this.numberAssets + "] = " + this.assets.ticker[this.numberAssets]);
 		this.assets.perc[this.numberAssets] = new Array(this.DAYS);
-		for(let i=1; i<history.length; i++)
+		for(let i=0; i<history.length; i++)
 		{
-			this.assets.perc[this.numberAssets][i] = history[i].changePercent;
+			this.assets.perc[this.numberAssets][i] = history[i].changePercent/100; //store as %
 			//say(history[i].changePercent);
 			//say("perc["+this.numberAssets+"]["+i+"] = " + this.assets.perc[this.numberAssets][i]);
 		}
@@ -82,12 +88,30 @@ function Portfolio() {
 		this.numberAssets++;
 	}
 
+	// Insert this week's risk free rate
 	this.setRiskFreeRate = function mySetRiskFreeRate(rate) {
 		this.Rf = rate;
 		this.Rf_set = true;
 	}
 	this.getRf = function myGetRf() { return this.Rf; }
 
+	// Insert the nth ticker's weight (%)
+	this.setWeight = function mySetWeight(n,w) {
+		this.weigth[n] = w;
+	}
+
+	// Check if the sum of all weights equal 100%
+	this.checkWeights = function myCheckWeights() {
+		let wSum = this.weights.reduce( (t,s) => t+s );
+		if (wSum == 100) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	//////////////////////////////////////////////////
 	// Helper Function to inspect state of this object
 	this.reportAsset = function myReportAsset(n) {
 		// (+) add out-of-bounds check
@@ -114,8 +138,11 @@ function Portfolio() {
 	}
 
 }//Portfolio
+////////////////////////////////////////////////////////////
 
 
+
+//  API:  Historical Stock Data from iextrading.com
 // Get the Historical Stock data by looping through the user's list
 function fetcher(tkrlist, myPortfolio) {
 	for (let i=0; i<tkrlist.length; i++) 
@@ -150,6 +177,10 @@ function getDataFromAPI( tkr, portfolio ) {
 }//getDataFromAPI
 
 
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+//   WEB PAGE CONTROLS
+//
 function watcher() {
 	const myPortfolio = new Portfolio();  // Our Portfolio of stocks
 
@@ -159,8 +190,9 @@ function watcher() {
 		myPortfolio.clear();
 
 		//let rawTickerList = $(event.currentTarget).find('.js-query').val();
-	//	let rawTickerList = "GE C MSFT GOOG AAPL";
-		let rawTickerList = "mhk ea";
+		let rawTickerList = "GE C MSFT GOOG AAPL";
+//		let rawTickerList = "mhk ea c";
+		//let rawTickerList = "ALL CAT DE LOW NKE QRVO TAP WHR ALLE CB DFS FE HST LRCX NLSN R TDC WLTW ALXN CBG DG FFIV HSY LUK NOC TDG WM AMAT CBOE DGX FIS HUM LUV NOV RCL TEL";
 		let tkrlist = rawTickerList.split(/[ ,]+/);
 		NUM_ASSETS_WAITING = tkrlist.length;  // set up the watch-and-wait
 		fetcher(tkrlist, myPortfolio); // the array of tickers and the portfolio object
