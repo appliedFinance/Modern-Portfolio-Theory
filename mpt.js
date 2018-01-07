@@ -99,11 +99,13 @@ function watcher() {
 		console.clear();
 		myPortfolio.clear();
 
-		let rawTickerList = $(event.currentTarget).find('#js-query').val();
+		let rawTickerList = $(event.currentTarget).find('.js-query').val();
 		//let rawTickerList = "GE C MSFT GOOG AAPL";
 		//let rawTickerList = "mhk ea c";
 		//let rawTickerList = "ALL CAT DE LOW NKE QRVO TAP WHR ALLE CB DFS FE HST LRCX NLSN R TDC WLTW ALXN CBG DG FFIV HSY LUK NOC TDG WM AMAT CBOE DGX FIS HUM LUV NOV RCL TEL";
 		let tkrlist = rawTickerList.split(/[ ,]+/);
+		 /// ?  can you remove doops?
+		 //  remove newlines
 		NUM_ASSETS_WAITING = tkrlist.length;  // set up the watch-and-wait
 		fetcher(tkrlist, myPortfolio); // the array of tickers and the portfolio object
 		doPortfolioCalculations(myPortfolio);

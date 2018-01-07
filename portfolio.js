@@ -15,7 +15,7 @@ function Portfolio() {
 	this.portVol = 0.0;
 	this.sharpeRatio = 1.55;
 	this.numberAssets = 0;
-	this.DAYS = 252;
+	this.DAYS = 252-3;
 	this.usable = true;
 	this.Rf = 0.0;
 	this.Rf_set = false;
