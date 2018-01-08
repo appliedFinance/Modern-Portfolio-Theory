@@ -27,12 +27,12 @@ function renderResults(portfolio) {
 	s = `<table class="width-80">
 		   <caption>Tangency Portfolio</caption>
 				<tr>
-					<th>Sharp Ratio</th>
+					<th>Sharpe Ratio</th>
 					<th>E[r]</th>
 					<th>Volatility</th>
 				</tr>
 				<tr>
-					<td>${portfolio.sharpeRatio}</td>
+					<td>${portfolio.sharpeRatio}<a href="www.bankrate.com"> (Rf = ${portfolio.Rf})</a></td>
 					<td>${portfolio.portEr}</td>
 					<td>${portfolio.portVol}</td>
 				</tr>
@@ -95,6 +95,28 @@ async function doPortfolioCalculations(portfolio) {
 
 }//doPortfolioCalculations
 
+// API:  GET http://ws.nasdaqdod.com/v1/NASDAQAnalytics.asmx/GetEndOfDayData?
+//           Symbols=string&StartDate=string&EndDate=string&MarketCenters=string
+function getEODfromAPI(tkr)
+{
+	// build the parameters object
+	let API_URL = `http://ws.nasdaqdod.com/v1/NASDAQAnalytics.asmx/GetEndOfDayData`;
+		const s = {
+			'Symbols': tkr,
+			'StartDate': ""
+		};
+		const settings = {
+			'url': API_URL,
+			'data': s,
+			'dataType': 'json',
+			'type': 'GET'
+		};
+	
+	let query =	$.ajax(settings);
+	query.done( data => say(data) );
+	query.fail( data => say(data) ); 
+}
+
 
 // API Get: from www.bankrate.com
 // Get this week's risk free rate (1y T-Bill)
@@ -152,10 +174,10 @@ function getDataFromAPI( tkr, portfolio ) {
 //////////////////////////////////////////////////////////////
 //   WEB PAGE CONTROLS
 function watcher() {
-	//document.getElementById("app-anchor").focus();
 	
 	const myPortfolio = new Portfolio();  // Our Portfolio of stocks
 	let tkrlist = [];
+	$('.js-query').val("IBM GOOG");
 
 	// Fetch Buton Click
 	$('.js-search-form').on("submit", event => {
@@ -170,6 +192,8 @@ function watcher() {
 		// Some basic error checking of the input line:
 		tkrlist = rawTickerList.split(/[ ,]+/);
 		tkrlist = tkrlist.filter(Boolean) // remove newlines & spaces
+			// filter out non-letter. /\w{1,5}/
+			// string.match(/\w{1,5}/);
 		tkrlist = Array.from(new Set(tkrlist)); // remove duplicates
 
 		NUM_ASSETS_WAITING = tkrlist.length;  // set up the watch-and-wait
@@ -195,11 +219,14 @@ function watcher() {
 
 	// Landing Pad Lightbox
 	$('.js-directions').html(APP_DIRECTIONS);
+	//  Ah ha!
+	//$(document.getElementById("app-anchor")).focus();
+	$("#app-anchor").focus();
 	$('.js-directions').on("click", function(event) {
 		$(this).addClass('no-display');
 	});
 
-
-}
+}//watcher
 
 $(watcher);
+

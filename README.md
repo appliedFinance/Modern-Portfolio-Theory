@@ -1,4 +1,4 @@
-Tangecy Portfolio
+Tangecy Portfolio:
 Compute the weights of the Tangenciy Portfolio given a list of stock tickers.
 
 API's used:

@@ -17,6 +17,12 @@
 #lightbox p {
 	text-align: center;
 	color: #fff;
+	font-size: 22px;
+}
+
+#lightbox p.app-title {
+	text-align: center;
+	color: #f4f736;
 	font-size: 28px;
 }
 
@@ -29,10 +35,13 @@
 }
 
 .app-directions {
+	width: 60%;
 	text-align: center;
-	margin: 50px;
 	padding-top: 15px;
-	border: 1px solid white;
+	/*border: 1px solid white;*/
+	margin: auto;
+	margin-top: 30px;
+	padding-bottom: 20px;
 }
 
 .app-title {
@@ -77,7 +86,7 @@ input[type=text] {
 
 /* The following table style is from w3schools. It makes rows alternate shading. */
 table {
-    width: *100%;
+    width: 100%;
 }
 .width-50 {
 	width: 50%;
@@ -93,13 +102,13 @@ th, td {
     padding: 5px;
     text-align: left;
 }
-table#t01 tr:nth-child(even) {
+table tr:nth-child(even) {
     background-color: #eee;
 }
-table#t01 tr:nth-child(odd) {
+table tr:nth-child(odd) {
    background-color:#fff;
 }
-table#t01 th {
+table th {
 /*    background-color: black;
     color: white;
 */

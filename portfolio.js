@@ -145,13 +145,17 @@ function solveForTangentPortfolioWeights(P) {
 	computeExpectedReturns(P);
 	computeVolatilities(P);
 
-	// temp fill to get working
+	// The high finance goes here. But in the mean time
+	// here are some place holding values to see the over-all
+	// functionality.
 	for(let i=0; i<P.numberAssets; i++) {
 		P.assets.weight[i] = uint(1,99)/100;
 		say(P.assets.ticker[i] + " = " + P.assets.weight[i]);
 	}
 	P.portEr = .55;
 	P.portVol = .25;
+
+//	getEODfromAPI(P.assets.ticker[0]);
 }
 
 
