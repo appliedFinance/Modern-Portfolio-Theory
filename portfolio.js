@@ -103,7 +103,7 @@ function showCovarianceMatrix(S) {
 		let s= "";
 		for(let j=0; j<N; j++) {
 			s = s + " " + S[i][j] + " ";
-		}
+n		}
 		say(i + ":  " + s);
 	}
 	say("\n=====================\n");	
@@ -145,17 +145,17 @@ function solveForTangentPortfolioWeights(P) {
 	computeExpectedReturns(P);
 	computeVolatilities(P);
 
-	// The high finance goes here. But in the mean time
-	// here are some place holding values to see the over-all
-	// functionality.
+	// The Matrix Routines go here; but go beyond the scope of
+	// this project; But in the mean time here are some place 
+	// holding values to see the over-all functionality.
 	for(let i=0; i<P.numberAssets; i++) {
 		P.assets.weight[i] = uint(1,99)/100;
 		say(P.assets.ticker[i] + " = " + P.assets.weight[i]);
 	}
-	P.portEr = .55;
-	P.portVol = .25;
+	P.portEr = mean(P.numberAssets,P.assets.Er).toFixed(5);
+	P.portVol = 1.6*mean(P.numberAssets,P.assets.vol).toFixed(5);
 
-//	getEODfromAPI(P.assets.ticker[0]);
+	//	getEODfromAPI(P.assets.ticker[0]);
 }
 
 

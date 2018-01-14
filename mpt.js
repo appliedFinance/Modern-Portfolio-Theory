@@ -32,7 +32,7 @@ function renderResults(portfolio) {
 					<th>Volatility</th>
 				</tr>
 				<tr>
-					<td>${portfolio.sharpeRatio}<a href="www.bankrate.com"> (Rf = ${portfolio.Rf})</a></td>
+					<td>${portfolio.sharpeRatio} <a href="https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx" target="_blank">(Rf = ${portfolio.Rf})</a></td>
 					<td>${portfolio.portEr}</td>
 					<td>${portfolio.portVol}</td>
 				</tr>
