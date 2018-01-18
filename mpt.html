@@ -1,48 +1,63 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html lang="en-US">
 
 	<head>
 		<meta charset="utf-8">
+		<title>Tangent Portfolio</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Tangency Portfolio</title>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-			 crossorigin="anonymous"></script>
+	 crossorigin="anonymous"></script>
 		<link href="mpt.css" rel="stylesheet" type="text/css" />
 		<link href="grid.css" rel="stylesheet" type="text/css" />
 	</head>
+	<body>
+		<section name="TopBar">
+		<div class="dash-bar-menu">
+			<li><a href="#">Login</a></li>
+			<li><a href="#">Register</a></li>
+			<li><a href="#">Contact</li></a>
+			<li><a href="#">FAQ</a></li>
+		</div>
+		</section>
 
-	<body class="max800">
-		<main role="main" aria-live="polite">
-		<section name="Directions">
+		<section name="splash-screen" role="banner" aria-live="assertive">
 			<div id="lightbox" class="js-directions"></div>
 		</section>
 
 
 		<section name="SearchBox">
-			<form action="#" class="js-search-form">
-				<fieldset class="center snug" style="padding-top:25px;">
-		<p>Enter ticker symbols into the text box.  Use either spaces or commas to separate them.  When you are ready click the Fetch Button to begin.</p>
-					<legend class="legend-banner"><span class="banner-space">Locate the tangent portfolio: </span></legend>
-					<label for="js-query">Tangency Portfolio</label>
-					<input type="text" class="js-query"><br><br>
+			<div class="row">
+				<div class="col-12">
+					<div class="spinner hidden">
+						<img src="https://media.giphy.com/media/12VgDdoTdUXT1u/giphy.gif" height="42" class="lowsep" width="42" alt="spinner"/>
+						<form action="#" id="js-spinner-form">
+							<button type="submit" class="center">Cancel</button>
+						</form>
+					</div>
 
-					<!--
-					<textarea class="js-query" style="width:70%; height:200px;">IBM GOOG</textarea><br><br>
-					-->
-
-					<button type="submit" class="search-button" style="margin-right:20px;">Fetch</button>
-					<button type="reset"  class="clear-button" >Clear </button>
-				</fieldset>
-			</form>
-			<div class="right"><a href="https://en.wikipedia.org/wiki/Modern_portfolio_theory" target="_blank">Modern Portfolio Theory</a></div>
+					<div class="formdiv center">
+						<form action="#" id="js-search-form">
+							<fieldset>
+								<input type="text" class="js-query lowsep">
+								<button type="submit" class="search-button" style="margin-right:20px;">Fetch</button>
+								<button type="reset"  class="clear-button" >Clear </button>
+							</fieldset>
+						</form>
+						<div class="right"><a href="https://en.wikipedia.org/wiki/Modern_portfolio_theory" target="_blank">Modern Portfolio Theory</a></div>
+					</div>
+				</div>
+			</div>
 		</section>
+
 		<section name="Results">
-			:
-			<div class="js-results results-box"></div>
+			<div class="row">
+				<div class="col-12">
+					<div class="js-results results-box"></div>
+				</div>
+			</div>
 		</section>
 
-		</main>
 		<script src="directions.js"></script>
 		<script src="stats.js"></script>
 		<script src="portfolio.js"></script>

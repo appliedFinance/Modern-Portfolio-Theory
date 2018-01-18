@@ -8,6 +8,8 @@ let NUM_ASSETS_WAITING=0;
 
 function renderErrors(portfolio) {
 
+		$('.spinner').toggleClass('hidden');
+		$('.formdiv').toggleClass('hidden');
 		say("=== 404 === 404 ===");
 		let s= "<p>The following ticker symbols did not return any data.  Please modifiy your portfolio input and try again.</p><p>";
 		for(let i=0; i<portfolio.errors.length; i++) {
@@ -22,6 +24,8 @@ function renderErrors(portfolio) {
 }
 
 function renderResults(portfolio) {
+		$('.spinner').toggleClass('hidden');
+		$('.formdiv').toggleClass('hidden');
 	let s="";
 	// First output the portfolio as a whole
 	s = `<table class="width-80">
@@ -32,7 +36,7 @@ function renderResults(portfolio) {
 					<th>Volatility</th>
 				</tr>
 				<tr>
-					<td>${portfolio.sharpeRatio} <a href="https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx" target="_blank">(Rf = ${portfolio.Rf})</a></td>
+					<td>${portfolio.sharpeRatio} ( R<sub>f</sub> =  <a href="https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx" target="_blank"> ${portfolio.Rf}</a> )</td>
 					<td>${portfolio.portEr}</td>
 					<td>${portfolio.portVol}</td>
 				</tr>
@@ -69,7 +73,7 @@ async function doPortfolioCalculations(portfolio) {
 	// Spin while waiting
 	while ((portfolio.numberAssets + portfolio.numErrors) < NUM_ASSETS_WAITING)
 	{
-		await pause(500);
+		await pause(1000);
 		say("waiting... " + portfolio.numberAssets + " -- " + NUM_ASSETS_WAITING);
 		//if (!portfolio.usable) {
 		//	say("BREAK on 404");
@@ -180,11 +184,13 @@ function watcher() {
 	$('.js-query').val("IBM GOOG");
 
 	// Fetch Buton Click
-	$('.js-search-form').on("submit", event => {
+	$('#js-search-form').on("submit", event => {
 		event.preventDefault();
 		console.clear();
 		myPortfolio.clear();
 		$('.js-results').html("");
+		$('.spinner').toggleClass('hidden');
+		$('.formdiv').toggleClass('hidden');
 
 		rawTickerList = $(event.currentTarget).find('.js-query').val();
 		//let rawTickerList = "GE C MSFT GOOG AAPL";
@@ -204,7 +210,11 @@ function watcher() {
 	// ReSubmit Button click
 	$('.js-results').on("submit", ".js-re-submit", function(event) {
 		say("RE-SUBMIT");
+		$('.spinner').toggleClass('hidden');
+		$('.formdiv').toggleClass('hidden');
 		$('.js-results').html("");
+//		$('.spinner').toggleClass('hidden');
+//		$('.formdiv').toggleClass('hidden');
 		tkrlist = tkrlist.filter( function(elt) {
 			return !myPortfolio.errors.includes(elt);
 		});
@@ -223,7 +233,13 @@ function watcher() {
 	//$(document.getElementById("app-anchor")).focus();
 	$("#app-anchor").focus();
 	$('.js-directions').on("click", function(event) {
-		$(this).addClass('no-display');
+		$(this).addClass('hidden');
+	});
+
+	// Cancel Button on Spinner
+	$('#js-spinner-form').on("submit", function (event) {
+		$('.spinner').toggleClass('hidden');
+		$('.formdiv').toggleClass('hidden');
 	});
 
 }//watcher

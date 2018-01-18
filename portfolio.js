@@ -103,7 +103,7 @@ function showCovarianceMatrix(S) {
 		let s= "";
 		for(let j=0; j<N; j++) {
 			s = s + " " + S[i][j] + " ";
-n		}
+		}
 		say(i + ":  " + s);
 	}
 	say("\n=====================\n");	

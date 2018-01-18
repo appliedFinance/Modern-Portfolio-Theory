@@ -1,7 +1,77 @@
-/* MPT CSS */
-
 * {
-	border-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	background: #e6e9ec;
+	
+}
+
+.dash-bar-menu {
+	width:100%;
+	float:right;
+	font-size:10pt;
+	background-color: #a51906;
+	list-style-type:none;
+	margin-bottom:80px;
+}
+.dash-bar-menu a {
+	display:block;
+	padding:0px 7px 0px 7px;
+	color:#fff;
+	text-decoration:none;
+}
+.dash-bar-menu a:hover { background:red; }
+.dash-bar-menu li {
+	float:right;
+	display:block;
+	line-height:30px;
+	padding-right:5px;
+	padding-left:5px;
+	color:#fff;
+}
+
+.formdiv {
+	width: 80%;
+	margin:auto;
+	margin-bottom:50px;
+/*	border: 1px solid green; */
+	max-width: 680px;
+	
+}
+
+.hidden {
+	display:none; 
+/*	visibility: hidden; */
+}
+
+.spinner {
+	position: relative;
+	text-align:center;
+}
+
+.small {
+	max-width: 80px;
+	max-height: 80px;
+}	
+
+.center {
+	text-align: center;
+}
+
+input[type=text] {
+  width: 95%;
+  padding: 5px 5px;
+  height: 50px;
+}
+
+.lowsep {
+	margin-bottom: 50px;
+}
+
+.right {
+	text-align: right;
+	padding-right: 55px;
 }
 
 #lightbox {
@@ -9,79 +79,21 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
-	text-align: center;
+	height: 200vh;  /* read about css units */
 	background: rgba(25,25,112,.90);
+	font-family: "Times New Roman", Times, serif;
+	padding: 20%;
+	padding-top: 20px;
 }
 
 #lightbox p {
-	text-align: center;
 	color: #fff;
-	font-size: 22px;
+	font-size: 18px;
 }
 
 #lightbox p.app-title {
-	text-align: center;
 	color: #f4f736;
 	font-size: 28px;
-}
-
-.max800 {
-	max-width: 800px;
-}
-
-.no-display {
-	display: none;
-}
-
-.app-directions {
-	width: 60%;
-	text-align: center;
-	padding-top: 15px;
-	/*border: 1px solid white;*/
-	margin: auto;
-	margin-top: 30px;
-	padding-bottom: 20px;
-}
-
-.app-title {
-	color: red; 
-}
-
-.app-text {
-	text-align: center;
-	padding-left: 80px;
-	padding-right: 80px;
-}
-
-.center {
-	text-align: center;
-}
-
-.snug {
-	width: 80%;
-	margin: auto;
-}
-
-input[type=text] {
-  width: 95%;
-  align: center;
-  padding: 5px 5px;
-  height: 50px;
-}
-
-.banner-space {
-	padding: 15px;
-	padding-bottom: 30px;
-}
-
-.error-spacer {
-	padding: 10px;
-}
-
-.results-box {
-	width: 80%;
-	margin: auto;
 }
 
 /* The following table style is from w3schools. It makes rows alternate shading. */
@@ -114,7 +126,3 @@ table th {
 */
 }
 
-.right {
-	text-align: right;
-	padding-right: 55px;
-}
