@@ -8,63 +8,76 @@ let NUM_ASSETS_WAITING=0;
 
 function renderErrors(portfolio) {
 
-		$('.spinner').toggleClass('hidden');
-		$('.formdiv').toggleClass('hidden');
-		say("=== 404 === 404 ===");
-		let s= "<p>The following ticker symbols did not return any data.  Please modifiy your portfolio input and try again.</p><p>";
-		for(let i=0; i<portfolio.errors.length; i++) {
-			say(portfolio.errors[i]);
-			s += '<span class="error-spacer">' + portfolio.errors[i] + "</span>";
-		}
-		s += "</p>";
-		s += '<p>Do you want me to Re-Submit after automatically removing these problems?</p><form action="#" class="js-re-submit"><button type="submit" id="re-send">RESUBMIT</button></form>';
-		$('.js-results').html(s);
-		say("===================");
+	$('.spinner').toggleClass('hidden');
+	$('.formdiv').toggleClass('hidden');
+	say("=== 404 === 404 ===");
+	let s= "<p>The following ticker symbols did not return any data.  Please modifiy your portfolio input and try again.</p><p>";
+	for(let i=0; i<portfolio.errors.length; i++) {
+		say(portfolio.errors[i]);
+		s += '<span class="error-spacer">' + portfolio.errors[i] + "</span>";
+	}
+	s += "</p>";
+	s += '<p>Do you want me to Re-Submit after automatically removing these problems?</p><form action="#" class="js-re-submit"><button type="submit" id="re-send">RESUBMIT</button></form>';
+	$('.js-results').html(s);
+	say("===================");
 
 }
 
 function renderResults(portfolio) {
-		$('.spinner').toggleClass('hidden');
-		$('.formdiv').toggleClass('hidden');
+	$('.spinner').toggleClass('hidden');
+	$('.formdiv').toggleClass('hidden');
 	let s="";
 	// First output the portfolio as a whole
-	s = `<table class="width-80">
-		   <caption>Tangency Portfolio</caption>
-				<tr>
-					<th>Sharpe Ratio</th>
-					<th>E[r]</th>
-					<th>Volatility</th>
-				</tr>
-				<tr>
-					<td>${portfolio.sharpeRatio} ( R<sub>f</sub> =  <a href="https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx" target="_blank"> ${portfolio.Rf}</a> )</td>
-					<td>${portfolio.portEr}</td>
-					<td>${portfolio.portVol}</td>
-				</tr>
-			</table>
-			<br><br>
-			`;
+	s = `<table class="width-80 margin-auto">
+		<caption>Tangency Portfolio</caption>
+		<tr><th>Sharpe Ratio</th><th>E[r]</th><th>Volatility</th></tr>
+		<tr>
+		<td>${portfolio.sharpeRatio} ( R<sub>f</sub> =  <a href="https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx" target="_blank"> ${portfolio.Rf}</a> )</td>
+		<td>${portfolio.portEr}</td>
+		<td>${portfolio.portVol}</td>
+		</tr>
+		</table>
+		<br><br>
+		`;
 
 	// Now ouput the optimal weights
-	s += `<table class="width-50">
-				<caption>Weights</caption>
+	s += `<div class="left-box">
+				<table>
 				<tr>
 					<th class="center">STOCK</th>
-					<th>Ticker</th>
-					<th>Optimal</th>
-				<tr>
-				`;	
+				</tr>
+		  `;	
 	for(let i=0; i<portfolio.numberAssets; i++)
 	{
 		s += `
-				<tr>
-					<td class="center">${i+1}</td>
-					<td>${portfolio.assets.ticker[i].toUpperCase()}</td>
-					<td>${portfolio.assets.weight[i]}</td>
-				</tr>
-				`;
+			<tr>
+				<td class="center">${i+1}</td>
+			</tr>
+			  `;
 	}
+	s += `</table></div>`; 
+	
+	s += `<div class="right-box">
+				<table>
+					<caption>Weights</caption>
+					<tr>
+						<th class="center">Ticker</th>
+							<th>Optimal</th>
+					</tr>
+		 `;	
+	for(let i=0; i<portfolio.numberAssets; i++)
+	{
+		s += `
+			<tr>
+			<td>${portfolio.assets.ticker[i].toUpperCase()}</td>
+			<td>${portfolio.assets.weight[i]}</td>
+			</tr>
+			`;
+	}
+	s += `</table></div>`;
+
 	$('.js-results').html(s);
-}
+}//renderResults
 
 
 
@@ -105,17 +118,17 @@ function getEODfromAPI(tkr)
 {
 	// build the parameters object
 	let API_URL = `http://ws.nasdaqdod.com/v1/NASDAQAnalytics.asmx/GetEndOfDayData`;
-		const s = {
-			'Symbols': tkr,
-			'StartDate': ""
-		};
-		const settings = {
-			'url': API_URL,
-			'data': s,
-			'dataType': 'json',
-			'type': 'GET'
-		};
-	
+	const s = {
+		'Symbols': tkr,
+		'StartDate': ""
+	};
+	const settings = {
+		'url': API_URL,
+		'data': s,
+		'dataType': 'json',
+		'type': 'GET'
+	};
+
 	let query =	$.ajax(settings);
 	query.done( data => say(data) );
 	query.fail( data => say(data) ); 
@@ -164,13 +177,13 @@ function getDataFromAPI( tkr, portfolio ) {
 			'dataType': 'json',
 			'type': 'GET'
 		};
-	
+
 	let query =	$.ajax(settings);
 	query.done( data => insertIntoPortfolio(data, tkr, portfolio) );
 	query.fail( data => { portfolio.usable = false; 
-								 portfolio.numErrors++;
-								 portfolio.errors.push(tkr);
-						       say("XXX '" + tkr + "' is 404 XXX") } );
+		portfolio.numErrors++;
+		portfolio.errors.push(tkr);
+		say("XXX '" + tkr + "' is 404 XXX") } );
 
 }//getDataFromAPI
 
@@ -178,10 +191,10 @@ function getDataFromAPI( tkr, portfolio ) {
 //////////////////////////////////////////////////////////////
 //   WEB PAGE CONTROLS
 function watcher() {
-	
+
 	const myPortfolio = new Portfolio();  // Our Portfolio of stocks
 	let tkrlist = [];
-	$('.js-query').val("IBM GOOG");
+	$('.js-query').val("IBM GOOG C GE MSFT SPY INTC ");
 
 	// Fetch Buton Click
 	$('#js-search-form').on("submit", event => {
@@ -194,13 +207,13 @@ function watcher() {
 
 		rawTickerList = $(event.currentTarget).find('.js-query').val();
 		//let rawTickerList = "GE C MSFT GOOG AAPL";
-		
+
 		// Some basic error checking of the input line:
 		tkrlist = rawTickerList.split(/[ ,]+/);
 		tkrlist = tkrlist.filter(Boolean) // remove newlines & spaces
 			// filter out non-letter. /\w{1,5}/
 			// string.match(/\w{1,5}/);
-		tkrlist = Array.from(new Set(tkrlist)); // remove duplicates
+			tkrlist = Array.from(new Set(tkrlist)); // remove duplicates
 
 		NUM_ASSETS_WAITING = tkrlist.length;  // set up the watch-and-wait
 		fetcher(tkrlist, myPortfolio); // sent the array of tickers and the portfolio object
@@ -213,8 +226,8 @@ function watcher() {
 		$('.spinner').toggleClass('hidden');
 		$('.formdiv').toggleClass('hidden');
 		$('.js-results').html("");
-//		$('.spinner').toggleClass('hidden');
-//		$('.formdiv').toggleClass('hidden');
+		//		$('.spinner').toggleClass('hidden');
+		//		$('.formdiv').toggleClass('hidden');
 		tkrlist = tkrlist.filter( function(elt) {
 			return !myPortfolio.errors.includes(elt);
 		});
