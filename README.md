@@ -4,7 +4,7 @@ Compute the weights of the Tangenciy Portfolio given a list of stock tickers.
 API's used:
   - api.iextrading.com v1.0
   - www.bankrate.com html-scrape with a Get
-
+  - finance.yahoo.com html-scape for summary statistics
 
 Let the user input a list of ticker symbols. Then compute and output the
 weights for each stock corresponding to the Tangential Portfolio 

@@ -7,7 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-	 crossorigin="anonymous"></script>
+	 		 crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link href="mpt.css" rel="stylesheet" type="text/css" />
 		<link href="grid.css" rel="stylesheet" type="text/css" />
 	</head>
@@ -21,8 +22,8 @@
 		</div>
 		</section>
 
-		<section name="splash-screen" role="banner" aria-live="assertive">
-			<div id="lightbox" class="js-directions"></div>
+		<section name="Introduction">
+			<div class="js-directions"></div>
 		</section>
 
 
@@ -36,12 +37,12 @@
 						</form>
 					</div>
 
-					<div class="formdiv center">
+					<div class="formdiv center hidden">
 						<form action="#" id="js-search-form">
 							<fieldset>
 								<input type="text" class="js-query lowsep">
-								<button type="submit" class="search-button" style="margin-right:20px;">Fetch</button>
-								<button type="reset"  class="clear-button" >Clear </button>
+								<button type="submit" class="fetch-button mr50"><img src="greenarrow-right.png" width="18" height="18"><span class="fetch-span">Fetch</span></button>
+								<button type="reset" class="fetch-button"><img src="clear2.png" width="18" height="18"><span class="fetch-span">Clear</span> </button>
 							</fieldset>
 						</form>
 						<div class="right"><a href="https://en.wikipedia.org/wiki/Modern_portfolio_theory" target="_blank">Modern Portfolio Theory</a></div>

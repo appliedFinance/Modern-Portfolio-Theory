@@ -240,13 +240,16 @@ function watcher() {
 		doPortfolioCalculations(myPortfolio);
 	});
 
-	// Landing Pad Lightbox
+	// Landing Pad - App Directions 
 	$('.js-directions').html(APP_DIRECTIONS);
-	//  Ah ha!
-	//$(document.getElementById("app-anchor")).focus();
-	$("#app-anchor").focus();
+	$(".intro-button-text").focus();
 	$('.js-directions').on("click", function(event) {
 		$(this).addClass('hidden');
+		$('div.formdiv').removeClass('hidden');
+	});
+	$('.js-directions').on("submit", function(event) {
+		$(this).addClass('hidden');
+		$('div.formdiv').removeClass('hidden');
 	});
 
 	// Cancel Button on Spinner

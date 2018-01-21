@@ -5,10 +5,11 @@
 body {
 	background: #e6e9ec;
 	background-image: linear-gradient(
-							rgba(0,0,0,.8),
-							rgba(0,0,0,.8)),
-							url(finimg2.jpg);
+	rgba(0,0,0,.8),
+	rgba(0,0,0,.8)),
+	url(finimg2.jpg);
 	background-size: cover;
+	font-family: 'Roboto', 'New Times Roman', Serif;
 }
 
 .dash-bar-menu {
@@ -39,14 +40,14 @@ body {
 	width: 80%;
 	margin:auto;
 	margin-bottom:50px;
-/*	border: 1px solid green; */
+	/*	border: 1px solid green; */
 	max-width: 680px;
-	
+
 }
 
 .hidden {
 	display:none; 
-/*	visibility: hidden; */
+	/*	visibility: hidden; */
 }
 
 .spinner {
@@ -64,9 +65,9 @@ body {
 }
 
 input[type=text] {
-  width: 95%;
-  padding: 5px 5px;
-  height: 50px;
+	width: 95%;
+	padding: 5px 5px;
+	height: 50px;
 }
 
 .lowsep {
@@ -76,6 +77,32 @@ input[type=text] {
 .right {
 	text-align: right;
 	padding-right: 55px;
+}
+
+.app-directions {
+	max-width: 650px;
+	margin:auto;
+	padding: 15px;
+	background-color:#050a14;
+}
+
+.app-text {
+	color: #fff;
+	font-size: 18px;
+}
+
+.app-title {
+	color: #f4f736;
+	font-size: 28px;
+}
+
+.intro-button-text {
+	background-color: #000;
+	color:#fff;
+	font-size: 120%;
+	padding:5px;
+	padding-right:10px;
+	padding-left:10px;
 }
 
 #lightbox {
@@ -102,7 +129,7 @@ input[type=text] {
 
 /* The following table style is from w3schools. It makes rows alternate shading. */
 table {
-    width: 100%;
+	width: 100%;
 }
 .width-50 {
 	width: 50%;
@@ -114,23 +141,23 @@ table {
 	margin: auto;
 }
 table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+	border: 1px solid black;
+	border-collapse: collapse;
 }
 th, td {
-    padding: 5px;
-    text-align: left;
+	padding: 5px;
+	text-align: left;
 }
 table tr:nth-child(even) {
-    background-color: #eee;
+	background-color: #eee;
 }
 table tr:nth-child(odd) {
-   background-color:#fff;
+	background-color:#fff;
 }
 table th {
-/*    background-color: black;
-    color: white;
-*/
+	/*    background-color: black;
+	color: white;
+	 */
 }
 
 .results-box {
@@ -149,5 +176,16 @@ table th {
 	width:22%;
 }
 
+.fetch-span {
+	padding-left:5px;
+	padding-bottom:18px;
+	font-size: 20px;
+}
 
+.fetch-button {
+	background-color:#eeeeee;
+} 
 
+.mr50 {
+	margin-right:50px;
+}
