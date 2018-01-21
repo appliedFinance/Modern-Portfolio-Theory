@@ -153,7 +153,7 @@ function solveForTangentPortfolioWeights(P) {
 		say(P.assets.ticker[i] + " = " + P.assets.weight[i]);
 	}
 	P.portEr = mean(P.numberAssets,P.assets.Er).toFixed(5);
-	P.portVol = 1.6*mean(P.numberAssets,P.assets.vol).toFixed(5);
+	P.portVol = (1.6*mean(P.numberAssets,P.assets.vol)).toFixed(5);
 
 	//	getEODfromAPI(P.assets.ticker[0]);
 }

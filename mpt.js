@@ -7,9 +7,7 @@ function pause(ms) { return new Promise(resolve=>setTimeout(resolve,ms));}
 let NUM_ASSETS_WAITING=0;
 
 function renderErrors(portfolio) {
-
-	$('.spinner').toggleClass('hidden');
-	$('.formdiv').toggleClass('hidden');
+	toggleSpinner();
 	say("=== 404 === 404 ===");
 	let s= "<p>The following ticker symbols did not return any data.  Please modifiy your portfolio input and try again.</p><p>";
 	for(let i=0; i<portfolio.errors.length; i++) {
@@ -24,8 +22,7 @@ function renderErrors(portfolio) {
 }
 
 function renderResults(portfolio) {
-	$('.spinner').toggleClass('hidden');
-	$('.formdiv').toggleClass('hidden');
+	toggleSpinner();
 	let s="";
 	// First output the portfolio as a whole
 	s = `<table class="width-80 margin-auto">
@@ -69,7 +66,7 @@ function renderResults(portfolio) {
 	{
 		s += `
 			<tr>
-			<td>${portfolio.assets.ticker[i].toUpperCase()}</td>
+			<td><a class="ticker-box" href="#">${portfolio.assets.ticker[i].toUpperCase()}</a></td>
 			<td>${portfolio.assets.weight[i]}</td>
 			</tr>
 			`;
@@ -190,6 +187,12 @@ function getDataFromAPI( tkr, portfolio ) {
 
 //////////////////////////////////////////////////////////////
 //   WEB PAGE CONTROLS
+
+function toggleSpinner() {
+	$('.spinner').toggleClass('hidden');
+	$('.formdiv').toggleClass('hidden');
+}
+
 function watcher() {
 
 	const myPortfolio = new Portfolio();  // Our Portfolio of stocks
@@ -202,8 +205,7 @@ function watcher() {
 		console.clear();
 		myPortfolio.clear();
 		$('.js-results').html("");
-		$('.spinner').toggleClass('hidden');
-		$('.formdiv').toggleClass('hidden');
+		toggleSpinner();
 
 		rawTickerList = $(event.currentTarget).find('.js-query').val();
 		//let rawTickerList = "GE C MSFT GOOG AAPL";
@@ -223,11 +225,8 @@ function watcher() {
 	// ReSubmit Button click
 	$('.js-results').on("submit", ".js-re-submit", function(event) {
 		say("RE-SUBMIT");
-		$('.spinner').toggleClass('hidden');
-		$('.formdiv').toggleClass('hidden');
+		toggleSpinner();
 		$('.js-results').html("");
-		//		$('.spinner').toggleClass('hidden');
-		//		$('.formdiv').toggleClass('hidden');
 		tkrlist = tkrlist.filter( function(elt) {
 			return !myPortfolio.errors.includes(elt);
 		});
@@ -254,8 +253,18 @@ function watcher() {
 
 	// Cancel Button on Spinner
 	$('#js-spinner-form').on("submit", function (event) {
-		$('.spinner').toggleClass('hidden');
-		$('.formdiv').toggleClass('hidden');
+		toggleSpinner();
+	});
+
+	// Ticker Light Box
+	$('.js-results').on("click", "a", function (event) {
+		const myTicker = $(event.currentTarget).text();
+		displayTickerCompanyStats(myTicker);
+	});
+	
+	// Close lightbox
+	$('.company-data').on("click", function(event) {
+		$('.company-data').toggleClass('hidden');
 	});
 
 }//watcher

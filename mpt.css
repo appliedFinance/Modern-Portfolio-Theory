@@ -110,26 +110,30 @@ input[type=text] {
 	padding-left:10px;
 }
 
-#lightbox {
+.company-data {
 	position: absolute; 
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 200vh;  /* read about css units */
-	background: rgba(25,25,112,.90);
+	width: 70%;
+	/* height: 200vh;  /* read about css units */
+	height: 70%;
+	background: rgba(25,25,112,.70);
 	font-family: "Times New Roman", Times, serif;
-	padding: 20%;
 	padding-top: 20px;
+	padding:10%;
+	margin: auto;
 }
 
-#lightbox p {
+.company-data p {
+
 	color: #fff;
 	font-size: 18px;
 }
 
-#lightbox p.app-title {
+.a-title {
 	color: #f4f736;
-	font-size: 28px;
+	font-size: 19px;
+	padding-right: 5px;
 }
 
 /* The following table style is from w3schools. It makes rows alternate shading. */
@@ -190,8 +194,18 @@ table th {
 .fetch-button {
 	background-color:#eeeeee;
 	padding-right:10px;
+	margin-top:18px;
 } 
 
 .mr50 {
 	margin-right:50px;
+}
+
+.ticker-box {
+	padding-left: 8px;
+}
+
+.ticker-box:hover {
+	box-shadow: 3px 3px 3px blue;
+	cursor:pointer;
 }

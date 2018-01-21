@@ -26,12 +26,15 @@
 			<div class="js-directions"></div>
 		</section>
 
+		<section name="Lightbox">
+			<div class="company-data hidden"></div>
+		</section>
 
 		<section name="SearchBox">
 			<div class="row">
 				<div class="col-12">
 					<div class="spinner hidden">
-						<img src="https://media.giphy.com/media/12VgDdoTdUXT1u/giphy.gif" height="42" class="lowsep" width="42" alt="spinner"/>
+						<img src="https://media.giphy.com/media/12VgDdoTdUXT1u/giphy.gif" height="64" class="lowsep" width="64" alt="spinner"/>
 						<form action="#" id="js-spinner-form">
 							<button type="submit" class="center">Cancel</button>
 						</form>
@@ -42,8 +45,14 @@
 						<form action="#" id="js-search-form">
 							<fieldset>
 								<input type="text" class="js-query lowsep">
-								<button type="submit" class="fetch-button mr50"><img src="greenarrow-right.png" width="18" height="18"><span class="fetch-span">Fetch</span></button>
+								<div class="row">
+									<div class="col-6">
+								<button type="submit" class="fetch-button"><img src="greenarrow-right.png" width="18" height="18"><span class="fetch-span">Fetch</span></button>
+									</div>
+									<div class="col-6">
 								<button type="reset" class="fetch-button"><img src="clear1.png" width="18" height="18"><span class="fetch-span">Clear</span> </button>
+									</div>
+								</div>
 							</fieldset>
 						</form>
 						<div class="right"><a href="https://en.wikipedia.org/wiki/Modern_portfolio_theory" target="_blank">Modern Portfolio Theory</a></div>
@@ -63,6 +72,7 @@
 		<script src="directions.js"></script>
 		<script src="stats.js"></script>
 		<script src="portfolio.js"></script>
+		<script src="ajax_Yahoo.js"></script>
 		<script src="mpt.js"></script>
 	</body>
 </html>

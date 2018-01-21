@@ -33,7 +33,7 @@ THE STORY:
 Byron was fresh out of high school and landed a great job with a hedge fund.
 Douglas Day was the managing director; he was a high charisma smooth-talker.
 And wouldn’t you know it just as Byron looked at his cell phone it started 
-ringing.  Incoming caller’s name glowed Douglas Day.
+ringing, the Incoming Caller’s name glowed Douglas Day.
 
 Byron’s eyes widened.  He took a deep breath and answered the phone.
 
@@ -54,7 +54,7 @@ take off.  Ok Byron, get to it.”
 
 Byron remembered using yahoo stock data in his portfolio management class.
 He went to the webpage and quickly had eight tickers ready to use.   But wait, 
-he only had 32 minutes.  Grabbing all eight of his choices historical data 
+he only had 32 minutes.  Grabbing all eight of his choice's historical data 
 and dumping them into an excel spread sheet would take precious time.  Then
 he would have to actually look up excel formulas to make sure he got the 
 parameters correct.  And he would have to google for the relevant matrix 
@@ -72,7 +72,7 @@ parses the html for the current value.  Plus, he used another API returning
 more general company data; using this provides more information about each 
 ticker leading to an overview of the portfolio’s content.
 
-12 hours later Denise sent him a $300 gift card, along with a text, “Thanks for the quick work.”
+After landing 12 hours later, Denise sent him a $300 gift card, along with a text, “Thanks for the quick work.”
 
 
 
