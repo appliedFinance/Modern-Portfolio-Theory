@@ -1,6 +1,9 @@
 Tangecy Portfolio:
 Compute the weights of the Tangenciy Portfolio given a list of stock tickers.
 
+ VISIT THE PAGE =>  http://www.highbaycapital.com/mpt/mpt.html
+
+
 API's used:
   - api.iextrading.com v1.0
   - www.bankrate.com html-scrape with a Get
