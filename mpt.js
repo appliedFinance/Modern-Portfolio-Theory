@@ -242,10 +242,10 @@ function watcher() {
 	// Landing Pad - App Directions 
 	$('.js-directions').html(APP_DIRECTIONS);
 	$(".intro-button-text").focus();
-	$('.js-directions').on("click", function(event) {
-		$(this).addClass('hidden');
-		$('div.formdiv').removeClass('hidden');
-	});
+//	$('.js-directions').on("click", function(event) {
+//		$(this).addClass('hidden');
+//		$('div.formdiv').removeClass('hidden');
+//	});
 	$('.js-directions').on("submit", function(event) {
 		$(this).addClass('hidden');
 		$('div.formdiv').removeClass('hidden');
@@ -273,6 +273,10 @@ $(watcher);
 
 /*
  *  o  Don't make the intro text clickable.
+ *  o  don't show search box after fetch
+ *  o  but add a 'resubmit'
+ *  o  fix ReSubmit text/layout
+ *  o  friendlier instructions
  *
  *
  */
