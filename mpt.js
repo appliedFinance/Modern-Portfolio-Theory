@@ -59,7 +59,7 @@ function renderResults(portfolio) {
 					<caption>Weights</caption>
 					<tr>
 						<th class="center">Ticker</th>
-							<th>Optimal</th>
+						<th>Optimal</th>
 					</tr>
 		 `;	
 	for(let i=0; i<portfolio.numberAssets; i++)

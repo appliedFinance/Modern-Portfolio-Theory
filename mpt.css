@@ -120,7 +120,7 @@ input[type=text] {
 	left: 15%;
 	width: 70%;
 	/* height: 200vh;  /* read about css units */
-	height: 70%;
+	height: 100%;
 	background: rgba(25,25,112,.70);
 	font-family: "Times New Roman", Times, serif;
 	padding-top: 20px;

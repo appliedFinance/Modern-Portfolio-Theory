@@ -44,7 +44,7 @@ async function displayTickerCompanyStats(ticker) {
 
 	const BASE = `https://finance.yahoo.com/quote/${ticker}?p=${ticker}`;
 	say(BASE);
-	const QUERY = 'https://www.whateverorigin.org/get?url=' + encodeURIComponent('https://finance.yahoo.com/quote/'+ticker+'?p='+ticker) + '&callback=?';
+	const QUERY = 'http://www.whateverorigin.org/get?url=' + encodeURIComponent('https://finance.yahoo.com/quote/'+ticker+'?p='+ticker) + '&callback=?';
 
 	let companyName = "--";
 	let close = "--";
