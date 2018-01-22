@@ -109,11 +109,15 @@ input[type=text] {
 	padding-right:10px;
 	padding-left:10px;
 }
-
+/* ask browser for scroll offset? Then .js can set top of lightbox.
+ * search center modal dialogue, plus width/size changes
+ * resize handler, then when window changes re-draws
+ * This is .js   
+ */
 .company-data {
 	position: absolute; 
 	top: 0;
-	left: 0;
+	left: 15%;
 	width: 70%;
 	/* height: 200vh;  /* read about css units */
 	height: 70%;
@@ -122,6 +126,7 @@ input[type=text] {
 	padding-top: 20px;
 	padding:10%;
 	margin: auto;
+	text-align:center;
 }
 
 .company-data p {

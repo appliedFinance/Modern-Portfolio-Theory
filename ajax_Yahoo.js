@@ -61,11 +61,11 @@ async function displayTickerCompanyStats(ticker) {
 	});
 
 	// spin
-	//toggleSpinner();
+	toggleSpinner();
 	while (beta == "--") {
 		await pause(500);
 	}
-	//toggleSpinner();
+	toggleSpinner();
 
 	const s = `	<p><span class="a-title">Name</span>: ${companyName}</p>
 					<p><span class="a-title">Close</span>: ${close}</p>

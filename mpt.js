@@ -271,3 +271,8 @@ function watcher() {
 
 $(watcher);
 
+/*
+ *  o  Don't make the intro text clickable.
+ *
+ *
+ */
