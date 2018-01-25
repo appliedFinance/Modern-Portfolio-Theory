@@ -4,11 +4,11 @@
 
 body {
 	background: #e6e9ec;
-	background-image: linear-gradient(
-	rgba(0,0,0,.8),
-	rgba(0,0,0,.8)),
+/*	background-image: linear-gradient(
+	rgba(0,0,0,.6),
+	rgba(0,0,0,.6)),
 	url(finimg2.jpg);
-	background-size: cover;
+	background-size: cover; */
 	font-family: 'Roboto', 'New Times Roman', Serif;
 }
 
@@ -121,12 +121,19 @@ input[type=text] {
 	width: 70%;
 	/* height: 200vh;  /* read about css units */
 	height: 100%;
-	background: rgba(25,25,112,.70);
+	background: rgba(25,25,112,.90);
 	font-family: "Times New Roman", Times, serif;
 	padding-top: 20px;
 	padding:10%;
 	margin: auto;
 	text-align:center;
+	border: 3px dashed yellow;
+}
+
+.company-frame {
+	padding: 10px;
+	background: rgba(25,25,112,.98);
+	border: 1px solid yellow;
 }
 
 .company-data p {
@@ -142,9 +149,9 @@ input[type=text] {
 }
 
 /* The following table style is from w3schools. It makes rows alternate shading. */
-table {
+/*table {
 	width: 100%;
-}
+}*/
 .width-50 {
 	width: 50%;
 }
@@ -159,7 +166,7 @@ table, th, td {
 	border-collapse: collapse;
 }
 th, td {
-	padding: 5px;
+	padding: 10px;
 	text-align: left;
 }
 table tr:nth-child(even) {
@@ -178,6 +185,7 @@ table th {
 	/* border: 1px dashed grey; */
 	text-align:center;
 	margin:auto;
+	margin-bottom: 100px;
 }
 
 .left-box {
@@ -208,6 +216,7 @@ table th {
 
 .ticker-box {
 	padding-left: 8px;
+	padding-right: 10px;
 }
 
 .ticker-box:hover {

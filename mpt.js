@@ -25,8 +25,9 @@ function renderResults(portfolio) {
 	toggleSpinner();
 	let s="";
 	// First output the portfolio as a whole
-	s = `<table class="width-80 margin-auto">
-		<caption>Tangency Portfolio</caption>
+	//s = `<table class="width-80 margin-auto">
+	s = `<table align="center">
+		<caption>The Tangency Portfolio's 'Expected Return' and 'Volatility'</caption>
 		<tr><th>Sharpe Ratio</th><th>E[r]</th><th>Volatility</th></tr>
 		<tr>
 		<td>${portfolio.sharpeRatio} ( R<sub>f</sub> =  <a href="https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx" target="_blank"> ${portfolio.Rf}</a> )</td>
@@ -56,7 +57,7 @@ function renderResults(portfolio) {
 	
 	s += `<div class="right-box">
 				<table>
-					<caption>Weights</caption>
+					<caption>Your Weights</caption>
 					<tr>
 						<th class="center">Ticker</th>
 						<th>Optimal</th>
@@ -67,7 +68,7 @@ function renderResults(portfolio) {
 		s += `
 			<tr>
 			<td><a class="ticker-box" href="#">${portfolio.assets.ticker[i].toUpperCase()}</a></td>
-			<td>${portfolio.assets.weight[i]}</td>
+			<td class="ticker-box">${portfolio.assets.weight[i]}</td>
 			</tr>
 			`;
 	}

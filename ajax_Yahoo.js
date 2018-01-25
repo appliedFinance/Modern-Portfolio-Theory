@@ -67,9 +67,12 @@ async function displayTickerCompanyStats(ticker) {
 	}
 	toggleSpinner();
 
-	const s = `	<p><span class="a-title">Name</span>: ${companyName}</p>
+	const s = `	<div class="company-frame">
+					<p><span class="a-title">Name</span>: ${companyName}</p>
 					<p><span class="a-title">Close</span>: ${close}</p>
 					<p><span class="a-title">Beta</span>: ${beta}</p>
+					</div>
+					x click to close
 				 `;
 	$('.company-data').html(s);
 	$('.company-data').toggleClass('hidden');
