@@ -17,20 +17,20 @@ summary data to help build a picture of the portfolio's content.
 
 Example:
 Tangential Portfolio<br>	
-<table>
-<tr><th>STOCK</th><th>Ticker</th><th>Optimal Sharp Ratio</th><th>Mean</th><th>Volatility</th></tr>
-<tr><td> </td><td> </td><td>1.51</td><td>0.2591</td><td>0.1320</td><tr>
-<tr><td>1</td><td>AAPL</td><td>2%</td></tr></table>
-	2      ETR     2%				
-	3      HD      8%				
-	4      LH      11%				
-	5      MON     8%				
-	6      NFLX    18%				
-	7      RSG     14%				
-	8      SPG     3%				
-	9      T       21%				
-	10     UPS     12%				
-	sum check =   100%		
+STOCK   Ticker	Optimal	 Sharp Ratio	 Mean	      Volatility<br>
+
+			  1.51		  0.259139564	0.131990748<br>
+	1      AAPL    2%<br>				
+	2      ETR     2%			<br>	
+	3      HD      8%				<br>
+	4      LH      11%				<br>
+	5      MON     8%				<br>
+	6      NFLX    18%				<br>
+	7      RSG     14%				<br>
+	8      SPG     3%				<br>
+	9      T       21%				<br>
+	10     UPS     12%				<br>
+	sum check =   100%		<br><br>
 
 
 THE STORY:
