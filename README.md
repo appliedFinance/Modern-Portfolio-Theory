@@ -1,5 +1,5 @@
 Tangecy Portfolio:
-Compute the weights of the Tangenciy Portfolio given a list of stock tickers.
+Compute the weights of the Tangency Portfolio given a list of stock tickers.
 
  VISIT THE PAGE =>  http://www.highbaycapital.com/mpt/mpt.html
 
@@ -17,9 +17,9 @@ summary data to help build a picture of the portfolio's content.
 
 Example:
 Tangential Portfolio	
-STOCK   Ticker	Optimal	 Sharp Ratio	 Mean	      Volatility
-			  1.51		  0.259139564	0.131990748
-	1      AAPL    2%				
+STOCK   Ticker	Optimal	 Sharp Ratio	 Mean	      Volatility<br>
+			  1.51		  0.259139564	0.131990748<br>
+	1      AAPL    2%<br>				
 	2      ETR     2%				
 	3      HD      8%				
 	4      LH      11%				
@@ -33,6 +33,7 @@ STOCK   Ticker	Optimal	 Sharp Ratio	 Mean	      Volatility
 
 
 THE STORY:
+=========
 Byron was fresh out of high school and landed a great job with a hedge fund.
 Douglas Day was the managing director; he was a high charisma smooth-talker.
 And wouldn’t you know it just as Byron looked at his cell phone it started 
