@@ -110,46 +110,7 @@ async function doPortfolioCalculations(portfolio) {
 
 }//doPortfolioCalculations
 
-// API:  GET http://ws.nasdaqdod.com/v1/NASDAQAnalytics.asmx/GetEndOfDayData?
-//           Symbols=string&StartDate=string&EndDate=string&MarketCenters=string
-function getEODfromAPI(tkr)
-{
-	// build the parameters object
-	let API_URL = `http://ws.nasdaqdod.com/v1/NASDAQAnalytics.asmx/GetEndOfDayData`;
-	const s = {
-		'Symbols': tkr,
-		'StartDate': ""
-	};
-	const settings = {
-		'url': API_URL,
-		'data': s,
-		'dataType': 'json',
-		'type': 'GET'
-	};
 
-	let query =	$.ajax(settings);
-	query.done( data => say(data) );
-	query.fail( data => say(data) ); 
-}
-
-
-// API Get: from www.bankrate.com
-// Get this week's risk free rate (1y T-Bill)
-function getRiskFreeRate(portfolio) {
-	let rate = 0.0;
-	const TBILLURL = "https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx";
-	let query =	$.get(TBILLURL);
-	query.done( page => {
-		let line1 = page.split(/ctl00_well_uc_rw1YearTRate_lbl1YearTRate/);
-		rate = line1[1].match(/(\d\.\d+)/)[1];	
-		portfolio.setRiskFreeRate(rate);
-	});
-	//fail silently letting Rf stay set at zero
-}
-
-
-
-// API:  Historical Stock Data from iextrading.com
 // Get the Historical Stock data by looping through the user's list
 function fetcher(tkrlist, myPortfolio) {
 	for (let i=0; i<tkrlist.length; i++) 
@@ -165,25 +126,6 @@ function insertIntoPortfolio(data, tkr, portfolio) {
 	//portfolio.reportPortfolio();
 }
 
-function getDataFromAPI( tkr, portfolio ) {
-
-	// build the parameters object
-	let API_URL = `https://api.iextrading.com/1.0/stock/${tkr}/chart/1y`; 
-		const settings = {
-			'url': API_URL,
-			'data': "",
-			'dataType': 'json',
-			'type': 'GET'
-		};
-
-	let query =	$.ajax(settings);
-	query.done( data => insertIntoPortfolio(data, tkr, portfolio) );
-	query.fail( data => { portfolio.usable = false; 
-		portfolio.numErrors++;
-		portfolio.errors.push(tkr);
-		say("XXX '" + tkr + "' is 404 XXX") } );
-
-}//getDataFromAPI
 
 
 //////////////////////////////////////////////////////////////
@@ -195,7 +137,6 @@ function toggleSpinner() {
 }
 
 function watcher() {
-
 	const myPortfolio = new Portfolio();  // Our Portfolio of stocks
 	let tkrlist = [];
 	$('.js-query').val("IBM GOOG C GE MSFT SPY INTC ");
