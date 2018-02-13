@@ -20,17 +20,17 @@ Tangential Portfolio<br>
 STOCK   Ticker	Optimal	 Sharp Ratio	 Mean	      Volatility<br>
 
 			  1.51		  0.259139564	0.131990748<br>
-	1      AAPL    2%<br>				
-	2      ETR     2%			<br>	
-	3      HD      8%				<br>
+	1      AAPL    2%					<br>				
+	2      ETR     2%					<br>	
+	3      HD      8%					<br>
 	4      LH      11%				<br>
-	5      MON     8%				<br>
+	5      MON     8%					<br>
 	6      NFLX    18%				<br>
 	7      RSG     14%				<br>
-	8      SPG     3%				<br>
+	8      SPG     3%					<br>
 	9      T       21%				<br>
 	10     UPS     12%				<br>
-	sum check =   100%		<br><br>
+	sum check =   100%			<br><br>
 
 
 THE STORY:
@@ -77,7 +77,7 @@ parses the html for the current value.  Plus, he used another API returning
 more general company data; using this provides more information about each 
 ticker leading to an overview of the portfolio’s content.
 
-After landing 12 hours later, Denise sent him a $300 gift card, along with a text, “Thanks for the quick work.”
+12 hours later, after landing, Douglas sent him a $300 gift card, along with a text, “Thanks for the quick work.”
 
 
 
