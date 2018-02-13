@@ -185,7 +185,7 @@ function watcher() {
 	$('.js-directions').html(APP_DIRECTIONS);
 	$(".intro-button-text").focus();
 	$('.js-directions').on("submit", function(event) {
-		//$(this).preventDefault();
+		event.preventDefault();
 		$(this).addClass('hidden');
 		$('div.formdiv').removeClass('hidden');
 	});
@@ -211,6 +211,7 @@ function watcher() {
 $(watcher);
 
 /*
+ *  o  Fix the centering of the result tables.
  *  o  Don't make the intro text clickable.
  *  o  don't show search box after fetch
  *  o  but add a 'resubmit'
