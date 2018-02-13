@@ -70,7 +70,7 @@ async function displayTickerCompanyStats(ticker) {
 	const s = `	<div class="company-frame">
 					<p><span class="a-title">Name</span>: ${companyName}</p>
 					<p><span class="a-title">Close</span>: ${close}</p>
-					<p><span class="a-title">Beta</span>: ${beta}</p>
+					<p><span class="a-title">Volume</span>: ${beta}</p>
 					</div>
 					x click to close
 				 `;

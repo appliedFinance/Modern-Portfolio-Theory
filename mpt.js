@@ -28,7 +28,7 @@ function renderResults(portfolio) {
 	//s = `<table class="width-80 margin-auto">
 	s = `<table align="center">
 		<caption>The Tangency Portfolio's 'Expected Return' and 'Volatility'</caption>
-		<tr><th>Sharpe Ratio</th><th>E[r]</th><th>Volatility</th></tr>
+		<tr><th tooltip="The Sharpe Ratio describes how much excess return you are receiving for the extra volatility that you endure for holding a riskier asset. Remember, you always need to be properly compensated for the additional risk you take for not holding a risk-free asset.  S(x) = (rx - Rf) / StdDev (x)" tooltip-position="left">Sharpe Ratio</th><th tooltip="Expected Return is the amount of profit or loss an investor anticipates" tooltip-position="top">E[r]</th><th tooltip="Volatility is a statistical measure of the dispersion of returns for a given portfolio" tooltip-postion="top">Volatility</th></tr>
 		<tr>
 		<td>${portfolio.sharpeRatio} ( R<sub>f</sub> =  <a href="https://www.bankrate.com/rates/interest-rates/1-year-treasury-rate.aspx" target="_blank"> ${portfolio.Rf}</a> )</td>
 		<td>${portfolio.portEr}</td>
@@ -57,10 +57,10 @@ function renderResults(portfolio) {
 	
 	s += `<div class="right-box">
 				<table>
-					<caption>Your Weights</caption>
+					<caption tooltip="Click links to use Yahoo ajax calls for addition Summary Information" tooltip-position="left">Your Output Weights</caption>
 					<tr>
 						<th class="center">Ticker</th>
-						<th>Optimal</th>
+						<th tooltip="Invest this percent of your bankroll ($)" tooltip-position="right">Optimal</th>
 					</tr>
 		 `;	
 	for(let i=0; i<portfolio.numberAssets; i++)
@@ -72,7 +72,7 @@ function renderResults(portfolio) {
 			</tr>
 			`;
 	}
-	s += `</table></div>`;
+	s += `</table></div><br><br><br>`;
 
 	$('.js-results').html(s);
 }//renderResults
@@ -184,11 +184,8 @@ function watcher() {
 	// Landing Pad - App Directions 
 	$('.js-directions').html(APP_DIRECTIONS);
 	$(".intro-button-text").focus();
-//	$('.js-directions').on("click", function(event) {
-//		$(this).addClass('hidden');
-//		$('div.formdiv').removeClass('hidden');
-//	});
 	$('.js-directions').on("submit", function(event) {
+		//$(this).preventDefault();
 		$(this).addClass('hidden');
 		$('div.formdiv').removeClass('hidden');
 	});
