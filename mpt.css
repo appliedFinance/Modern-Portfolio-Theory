@@ -230,4 +230,7 @@ button {
 	cursor:pointer;
 }
 
-
+.lift {
+	z-index: 1;
+	background-color: #eee;
+}
