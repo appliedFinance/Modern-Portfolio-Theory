@@ -57,7 +57,7 @@ function renderResults(portfolio) {
 	
 	s += `<div class="right-box">
 				<table>
-					<caption tooltip="Click links to use Yahoo ajax calls for addition Summary Information" tooltip-position="left">Your Output Weights</caption>
+					<caption role="banner" tooltip="Click links to use Yahoo ajax calls for addition Summary Information" tooltip-position="left">Your Output Weights</caption>
 					<tr>
 						<th class="center">Ticker</th>
 						<th tooltip="Invest this percent of your bankroll ($)" tooltip-position="right">Optimal</th>
